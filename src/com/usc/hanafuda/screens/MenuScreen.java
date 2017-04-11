@@ -22,28 +22,28 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.usc.hanafuda.HClient;
 import com.usc.hanafuda.MyGame;
 
 public class MenuScreen extends JPanel {
-	
-	
 	private JButton singlePlayButton;
-	//private JButton multiPlayButton;
 	private JButton howToButton;
 	ImageIcon icon;
 	Image scaledImage;
 	BufferedImage originalImage = null;
 	
-	public MenuScreen(final MyGame myGame) {
+	
+	public MenuScreen (final MyGame myGame, HClient client) {
+		// Set layout manager
+		this.setLayout (new GridBagLayout());
 		
-		this.setLayout(new GridBagLayout());
-		JPanel center = new JPanel(new GridLayout(2,1));
+		// Create panel to show in the center
+		JPanel center = new JPanel (new GridLayout (2,1));
+		center.setOpaque (false);
+		add (center);
 		
-		center.setOpaque(false);
-		add(center);
+		// Create image for center of menu
 		BufferedImage image = null;
-		
-		//Image scaledImage = originalImage.getScaledInstance(this.getWidth(),this.getHeight(),Image.SCALE_SMOOTH);
 		try {
 			image = ImageIO.read(new File("haha.png"));
 			
@@ -51,58 +51,61 @@ public class MenuScreen extends JPanel {
 			e.printStackTrace();
 		}
 		
-		JLabel imageLabel = new JLabel(new ImageIcon(image));
+		// Set background of center panel (Hanafuda title)
+		JLabel imageLabel = new JLabel (new ImageIcon (image));
 		JLabel backgroundLabel = new JLabel();
-		backgroundLabel.setIcon(icon);
-		center.add(imageLabel);
+		backgroundLabel.setIcon (icon);
+		center.add (imageLabel);
 		
+		// Create panel for menu buttons
 		JPanel south = new JPanel();
-		center.add(south);
+		center.add (south);		
+		south.setOpaque (false);
 		
-		south.setOpaque(false);
+		// Set up play button
 		singlePlayButton = new JButton("Play"); 
-		singlePlayButton.setFont(new Font("TimesRoman", Font.BOLD, 30));
-		singlePlayButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent aa) {
-				GameScreen gs = new GameScreen (myGame);
+		singlePlayButton.setFont (new Font ("TimesRoman", Font.BOLD, 30));
+		singlePlayButton.addActionListener (new ActionListener() {
+			public void actionPerformed (ActionEvent aa) {
+				// When the play button is clicked, create a game screen; set in MyGame to access later
+				GameScreen gs = new GameScreen (myGame, client);
 				myGame.setGameScreen(gs);
 				myGame.setPanel(gs);
-				
 			}
 		});
 
-		
-		howToButton = new JButton("How To");
-		howToButton.setFont(new Font("TimesRoman", Font.BOLD, 30));
-		howToButton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent ae){
+		// Set up how to button
+		howToButton = new JButton ("How To");
+		howToButton.setFont (new Font ("TimesRoman", Font.BOLD, 30));
+		howToButton.addActionListener (new ActionListener() {
+			public void actionPerformed (ActionEvent ae) {
 				new HowToScreen();
 			}
 		});
+		
+		// Set preferred sizes of buttons
 		singlePlayButton.setPreferredSize(new Dimension(150, 100));
-		//multiPlayButton.setPreferredSize(new Dimension(150, 100));
 		howToButton.setPreferredSize(new Dimension(150, 100));
 		
-		south.add(singlePlayButton);
-		//south.add(multiPlayButton);
-		south.add(howToButton);
-
+		// Add buttons to their panel
+		south.add (singlePlayButton);
+		south.add (howToButton);
 		
 	}
 	
-	protected void paintComponent(Graphics g){
-		super.paintComponent(g);
+	
+	protected void paintComponent (Graphics g) {
+		super.paintComponent (g);
 		
 		try {
+			// Background image
 			originalImage = ImageIO.read(new File("hanafudaBG.jpg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		scaledImage = originalImage.getScaledInstance(this.getWidth(),this.getHeight(),Image.SCALE_SMOOTH);
-		g.drawImage(scaledImage, 0, 0, this.getWidth(), this.getHeight(), this);
-		//g.setColor(new Color(246, 244, 186));
 		
-		//g.fillRect(0, 0, 1400, 1000);
+		scaledImage = originalImage.getScaledInstance (this.getWidth(), this.getHeight(), Image.SCALE_SMOOTH);
+		g.drawImage (scaledImage, 0, 0, this.getWidth(), this.getHeight(), this);
 
 	}
 	

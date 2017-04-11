@@ -56,7 +56,6 @@ public class CardButton extends JButton{
 	}
 	
 	
-	
 	public void setGlow(){
 		setGlow = true;
 	}

@@ -31,7 +31,7 @@ public class Database {
 			ResultSet result = myStatement.executeQuery (selectQuery);
 			
 			while (result.next()) {
-				System.out.println (result.getString(1) + " " + result.getString(2) + " " + result.getString(3));
+				//System.out.println (result.getString(1) + " " + result.getString(2) + " " + result.getString(3));
 			}
 		} catch (ClassNotFoundException e) {
 			System.out.println (e.getMessage());

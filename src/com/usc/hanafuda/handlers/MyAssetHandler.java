@@ -31,7 +31,10 @@ public class MyAssetHandler {
 		BufferedImage image = null;
 		try {
 			image = ImageIO.read(new File("all.png"));
-			System.out.println("load + cardImage.jpg");
+			
+			//DEBUG
+			//System.out.println("load + cardImage.jpg");
+			
 			deckImage = ImageIO.read(new File("deck.png"));
 		
 			for(int i = 0; i < ROW; i++){
@@ -57,7 +60,9 @@ public class MyAssetHandler {
 
 
 	public static ImageIcon getIcon(int i) {
-		System.out.println("image at " + i);
+		//DEBUG
+		//System.out.println("image at " + i);
+		
 		return cardIconArray[i];
 	}
 	

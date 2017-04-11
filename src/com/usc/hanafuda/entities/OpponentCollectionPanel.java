@@ -14,24 +14,22 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 
 import com.usc.hanafuda.handlers.MyAssetHandler;
+import com.usc.hanafuda.screens.GameScreen;
 
-public class OpponentCollectionPanel extends JPanel implements Runnable{
+public class OpponentCollectionPanel extends JPanel {
+	private GameScreen gameScreen;
 	
 	Lock lock = new ReentrantLock();
-	private  static boolean refreshFlag = false;
-	private static boolean removeAllPictures = false;
+	private  boolean refreshFlag = false;
+	private boolean removeAllPictures = false;
 
 
-	OpponentCollectionPanel(){
-//		this.setEditable(false);
+	public OpponentCollectionPanel (GameScreen gs) {
+		this.gameScreen = gs;
 		this.setLayout(new FlowLayout());
-//		JLabel iconLabel2 = new JLabel( new ImageIcon ( "deck.png" ));
-//		this.add(iconLabel1);
-//		this.add(iconLabel2);
 
-		Thread t = new Thread (this); // added by X
-		t.start();
 	}
+	
 	
 	public void run(){
 		while(true){
@@ -51,38 +49,27 @@ public class OpponentCollectionPanel extends JPanel implements Runnable{
 //				refreshFlag=false;
 //			}
 			lock.unlock();
-
-		
-			
 		}
 	}
 	
-	public  void updateCollection(){
-		System.out.println("refreshing collection");
-		ArrayList<Card> collection = HandPanel.hClient.getOpponentCollection();
+	
+	public  void updateCollection() {
+		//DEBUG
+		System.out.println("OpponentCollectionPanel: Entering updateCollection()");
 		
-		removeAllPictures = true;
-		while (removeAllPictures==true){
-			System.out.println("waiting for opponent collection to be erased");
-		}
-
-		System.out.println("Collection successfully erased");
+		ArrayList<Card> collection = gameScreen.getClient().getOpponentCollection();
 		
-		for(int i = 0 ; i < collection.size(); i++){
+		this.removeAll();
+		this.revalidate();
+		
+		for (int i = 0 ; i < collection.size(); i++) {
 			int id = collection.get(i).getId();
-			Image buffered = MyAssetHandler.cardImageArray[id].getScaledInstance(85,140,Image.SCALE_SMOOTH);
-			JLabel iconLabel1 = new JLabel(new ImageIcon(buffered));
-//			JLabel imageLabel = new JLabel(ic);
-//			imageLabel.setBounds(40+i*5, 40, MyAssetHandler.WIDTH, MyAssetHandler.HEIGHT );
-			this.add(iconLabel1);
-			System.out.println("reading captured image to collection:");
-			String n  = collection.get(i).getName();
-			System.out.println("Adding " + n + " to Collection Panel");
+			Image buffered = MyAssetHandler.cardImageArray[id].getScaledInstance (85, 140, Image.SCALE_SMOOTH);
+			JLabel iconLabel1 = new JLabel (new ImageIcon (buffered));
+			this.add (iconLabel1);
+			
 			this.validate();
 			this.repaint();
-		}
-
-		
+		}	
 	}
-	
 }

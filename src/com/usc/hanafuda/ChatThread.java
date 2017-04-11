@@ -18,7 +18,6 @@ public class ChatThread extends Thread{
 		try {
 			this.pw=new PrintWriter(s.getOutputStream());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -42,7 +41,7 @@ public class ChatThread extends Thread{
 		} catch (IOException e) {
 			
 			cs.removeClient(this);		
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 	}
