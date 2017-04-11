@@ -31,39 +31,39 @@ public class MenuScreen extends JPanel {
 	ImageIcon icon;
 	Image scaledImage;
 	BufferedImage originalImage = null;
-	
-	
+
+
 	public MenuScreen (final MyGame myGame, HClient client) {
 		// Set layout manager
 		this.setLayout (new GridBagLayout());
-		
+
 		// Create panel to show in the center
 		JPanel center = new JPanel (new GridLayout (2,1));
 		center.setOpaque (false);
 		add (center);
-		
+
 		// Create image for center of menu
 		BufferedImage image = null;
 		try {
 			image = ImageIO.read(new File("haha.png"));
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		// Set background of center panel (Hanafuda title)
 		JLabel imageLabel = new JLabel (new ImageIcon (image));
 		JLabel backgroundLabel = new JLabel();
 		backgroundLabel.setIcon (icon);
 		center.add (imageLabel);
-		
+
 		// Create panel for menu buttons
 		JPanel south = new JPanel();
-		center.add (south);		
+		center.add (south);
 		south.setOpaque (false);
-		
+
 		// Set up play button
-		singlePlayButton = new JButton("Play"); 
+		singlePlayButton = new JButton("Play");
 		singlePlayButton.setFont (new Font ("TimesRoman", Font.BOLD, 30));
 		singlePlayButton.addActionListener (new ActionListener() {
 			public void actionPerformed (ActionEvent aa) {
@@ -82,32 +82,31 @@ public class MenuScreen extends JPanel {
 				new HowToScreen();
 			}
 		});
-		
+
 		// Set preferred sizes of buttons
 		singlePlayButton.setPreferredSize(new Dimension(150, 100));
 		howToButton.setPreferredSize(new Dimension(150, 100));
-		
+
 		// Add buttons to their panel
 		south.add (singlePlayButton);
 		south.add (howToButton);
-		
+
 	}
-	
 	
 	protected void paintComponent (Graphics g) {
 		super.paintComponent (g);
-		
+
 		try {
 			// Background image
 			originalImage = ImageIO.read(new File("hanafudaBG.jpg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		scaledImage = originalImage.getScaledInstance (this.getWidth(), this.getHeight(), Image.SCALE_SMOOTH);
 		g.drawImage (scaledImage, 0, 0, this.getWidth(), this.getHeight(), this);
 
 	}
-	
+
 
 }

@@ -8,14 +8,14 @@ import javax.swing.ImageIcon;
 
 public class Card implements Serializable {
 	enum Month {
-		January, February, March, April, May, June, 
+		January, February, March, April, May, June,
 		July, August, September, October, November, December
 	}
-	
+
 	public enum Yaku {
 		I, Ro, Ha, Ni, Ho, He, To, Chi
 	}
-	
+
 	private String name;
 	private Month month;
 	private Yaku yaku1, yaku2;
@@ -39,50 +39,50 @@ public class Card implements Serializable {
 	public void printName() {
 		System.out.println(name);
 	}
-	
+
 	public void setImage(ImageIcon i){
 		this.image =i;
 	}
 	public ImageIcon getImage() {
 		return image;
 	}
-	
+
 	public int getValue() {
 		return value;
 	}
-    
+
     public int getId() {
 		return id;
 	}
-	
+
 	public Month getMonth() {
 		return month;
 	}
-	
+
 	public Yaku getYaku1() {
 		return yaku1;
 	}
-	
+
 	public Yaku getYaku2() {
 		return yaku2;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public boolean isGaji() {
 		return gaji;
 	}
-	
+
 	public void setGajiMonth (Month m) {
 		gajiMonth = m;
 	}
-	
+
 	public Month getGajiMonth () {
 		return gajiMonth;
 	}
-	
+
 	public boolean isMatch(Card cd) {
 		if (this.month == cd.getMonth() || this.gaji == true) {
 				return true;
@@ -91,5 +91,4 @@ public class Card implements Serializable {
 			return false;
 		}
 	}
-	
 }

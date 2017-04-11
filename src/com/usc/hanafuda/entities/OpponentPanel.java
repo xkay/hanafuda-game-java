@@ -35,29 +35,23 @@ public class OpponentPanel extends JPanel {
 	private int cardLeft = 8;
 	private int score = 0;
 	private BufferedImage cardFaceDown;
-	
+
 	public OpponentPanel (HClient hc, GameScreen gs) {
 		this.hClient = hc;
 		this.gameScreen = gs;
-		
+
 		this.setLayout (new BoxLayout(this, BoxLayout.X_AXIS));
-		
-		// Set up name label and captured card button
-		/*
-		nameLabel = new JLabel (" ");
-		nameLabel.setFont (new Font (Font.DIALOG, Font.PLAIN, 30));
-		this.add (nameLabel);
-		*/
+
 		this.add (Box.createHorizontalGlue());
 		showCapturedCard = new JButton ("Show Captured Cards");
 		showCapturedCard.setMaximumSize (new Dimension (160,40));
-		opponentCollectionPanel = new OpponentCollectionPanel (gs);		
- 
+		opponentCollectionPanel = new OpponentCollectionPanel (gs);
+
 		int v = ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
 	    int h = ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED;
 		final JScrollPane jsp = new JScrollPane (opponentCollectionPanel, v , h);
 		this.add (showCapturedCard);
-		
+
 		showCapturedCard.addActionListener (new ActionListener() {
 			public void actionPerformed (ActionEvent ae) {
 				JFrame popup = new JFrame ("Opponent's Collection Cards");
@@ -69,85 +63,72 @@ public class OpponentPanel extends JPanel {
 				popup.add (jsp);
 			}
 		});
-		
+
 		// Create panel to show opponent's hand
 		cardPanel = new JPanel();
 		cardPanel.setBackground (Color.LIGHT_GRAY);
 		add (cardPanel);
 		this.add (Box.createHorizontalGlue());
-		
+
 		// Create panel that contains score and number of cards left
 		JPanel eastPanel = new JPanel();
 		eastPanel.setBackground (Color.LIGHT_GRAY);
 		eastPanel.setLayout (new BoxLayout(eastPanel, BoxLayout.Y_AXIS));
-		
+
 		// Create label for score
 		scoreLabel = new JLabel ("Score: " + Integer.toString(score) + " ");
 		scoreLabel.setFont (new Font ("Arial", Font.PLAIN, 30));
 		eastPanel.add (scoreLabel);
-		
+
 		// Create label for cards left
 		numCards = new JLabel ("Cards left: " + cardLeft + " ");
 		numCards.setFont (new Font ("Arial", Font.PLAIN, 30));
 		eastPanel.add (numCards);
-		
+
 		this.add (eastPanel);
 		this.setBorder (BorderFactory.createLineBorder (Color.darkGray, 3));
 		this.setBackground (Color.LIGHT_GRAY);
 		this.setPreferredSize (new Dimension (1150, 200));
 		this.setMinimumSize (new Dimension (1150, 200));
 		this.setMaximumSize (new Dimension (1150, 200));
-		
+
 		try {
 			cardFaceDown = ImageIO.read (new File ("deck.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		refreshOpponentHand();
 
+		refreshOpponentHand();
 	}
-	
-	
+
+
 	public void setScore (int score) {
 		scoreLabel.setText ("Score: " + Integer.toString (score));
-		
 	}
-	
-	
+
 	public OpponentCollectionPanel returnOpponentCollectionPanel() {
 		return opponentCollectionPanel;
-		
 	}
-	
-	
+
 	public void incScore (int incBy) {
 		score = score + incBy;
 		scoreLabel.setText ("Score: " + Integer.toString (score));
-		
 	}
-	
-	
+
 	public void discardCard() {
 		cardLeft--;
 		numCards.setText ("Cards left: " + cardLeft + " ");
 		cardPanel.removeAll();
 		refreshOpponentHand();
-		
 	}
-	
-	
+
 	public void refreshOpponentHand() {
 		cardPanel.removeAll();
 
-		for(int i = 0; i < cardLeft; i++) {
+		for (int i = 0; i < cardLeft; i++) {
 			cardPanel.add (new JLabel (new ImageIcon (cardFaceDown)));
 		}
-		
-		numCards.setText ("Cards left: " + cardLeft + " ");
-		//cardLeft--;
-		
-	}
 
-	
+		numCards.setText ("Cards left: " + cardLeft + " ");
+	}
 }

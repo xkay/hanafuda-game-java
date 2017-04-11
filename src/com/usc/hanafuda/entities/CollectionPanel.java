@@ -19,32 +19,30 @@ import com.usc.hanafuda.screens.GameScreen;
 public class CollectionPanel extends JPanel {
 	private GameScreen gameScreen;
 	
-
 	public CollectionPanel (GameScreen gs) {
 		gameScreen = gs;
 		this.setLayout (new FlowLayout());
 
 	}
-	
-	
+
 	public void updateCollection() {
 		//DEBUG
 		//System.out.println ("CollectionPanel: updateCollection()");
-		
+
 		ArrayList<Card> collection = gameScreen.getClient().getCollection();
-		
+
 		removeAll();
-		
+
 		for (int i = 0 ; i < collection.size(); i++) {
 			int id = collection.get(i).getId();
 			Image buffered = MyAssetHandler.cardImageArray[id].getScaledInstance(85,140,Image.SCALE_SMOOTH);
 			JLabel iconLabel1 = new JLabel (new ImageIcon (buffered));
 			this.add (iconLabel1);
-			
+
 			this.validate();
 			this.repaint();
-			
+
 		}
 	}
-	
+
 }

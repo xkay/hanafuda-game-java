@@ -8,7 +8,7 @@ import java.net.Socket;
 
 
 public class ChatThread extends Thread{
-	
+
 	private Socket s;
 	private ChatServer cs;
 	private PrintWriter pw;
@@ -21,26 +21,24 @@ public class ChatThread extends Thread{
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void send (String message) {
 		pw.println(message);
 		pw.flush();
-		
-		
+
 	}
-	
+
 	public void run (){
 		try {
 			BufferedReader br=new BufferedReader(new InputStreamReader(s.getInputStream()));
 			while(true){
 				String line=br.readLine();
 				cs.sendMessage(line,this);
-				//line=br.readLine();
 			}
-			
+
 		} catch (IOException e) {
-			
-			cs.removeClient(this);		
+
+			cs.removeClient(this);
 
 			e.printStackTrace();
 		}

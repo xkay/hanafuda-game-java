@@ -12,28 +12,28 @@ import com.usc.hanafuda.handlers.MyAssetHandler;
 
 public class Deck {
 	private ArrayList<Card> cardDeck;
-	
+
 	public Deck () {
 		cardDeck = new ArrayList<Card> ();
 		initializeCards();
 		initializeCardImages();
 		shuffleDeck();
 	}
-	
+
 	private void shuffleDeck() {
 		Collections.shuffle (cardDeck);
 	}
-	
+
 	public int numCardsLeft() {
 		return cardDeck.size();
 	}
-	
+
 	public Card drawCard() {
 		Card c = cardDeck.get(0);
 		cardDeck.remove(0);
 		return c;
 	}
-	
+
 	//DEBUG
 	public void printDeck () {
 		for (Card c : cardDeck) {
@@ -41,7 +41,6 @@ public class Deck {
 		}
 	}
 
-	
 	private void initializeCards () {
 		cardDeck.add (new Card (0, "January0_20pts_Ro", Card.Month.January, Card.Yaku.Ro, null, false, null, 20));
 		cardDeck.add (new Card (1, "January1_10pts_Ha", Card.Month.January, Card.Yaku.Ha, null, false, null, 10));
@@ -92,11 +91,11 @@ public class Deck {
 		cardDeck.add (new Card (46, "December2_0pts", Card.Month.December, null, null, false, null, 0));
 		cardDeck.add (new Card (47, "December3_0pts", Card.Month.December, null, null, false, null, 0));
 	}
+	
 	private void initializeCardImages(){ // added by me to initialize images
 		for(int i=0;i<cardDeck.size();i++){
 			(cardDeck.get(i)).setImage(MyAssetHandler.getIcon(i));
 		}
-		
 	}
-	
+
 }
