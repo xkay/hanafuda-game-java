@@ -131,8 +131,6 @@ public class FieldPanel extends JPanel {
 	}
 
 	public synchronized void refreshDisplay() {
-		//System.out.println ("FieldPanel: Entering refreshDisplay()");
-
 		for (int i = 0 ; i < cardButtonList.size(); i++) {
 			this.add (cardButtonList.get(i));
 			cardButtonList.get(i).setBounds (140+i*gap, cardButtonList.get(i).getNewX(), MyAssetHandler.WIDTH, MyAssetHandler.HEIGHT);
@@ -195,7 +193,6 @@ public class FieldPanel extends JPanel {
 		}
 
 		public void actionPerformed (ActionEvent e) {
-			//System.out.println ("Deck has been clicked.");
 			numDeckClicked++;
 
 			HandPanel hp = gameScreen.getHandPanel();

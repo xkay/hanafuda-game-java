@@ -32,13 +32,13 @@ public class GameScreen extends JPanel {
 	private FieldPanel fieldPanel;
 	private MyGame myGame;
 	private HClient client;
-	
-	
+
+
 	public GameScreen (MyGame mg, HClient hc) {
 		this.myGame = mg;
 		this.client = hc;
 		this.setLayout (new BorderLayout());
-		
+
 		// Create panel for game play
 		JPanel deckPanel = new JPanel();
 		deckPanel.setLayout (new BorderLayout());
@@ -48,15 +48,15 @@ public class GameScreen extends JPanel {
 		// Create panel for player's hand
 		handPanel = new HandPanel (myGame.getHClient(), this);
 		deckPanel.add (handPanel, BorderLayout.SOUTH);
-	
+
 		// Create panel for field cards
 		fieldPanel = new FieldPanel (myGame.getHClient(), this);
 		deckPanel.add (fieldPanel, BorderLayout.CENTER);
-		
+
 		// Create panel to show opponent's hand
 		opponentPanelNorth = new OpponentPanel (myGame.getHClient(), this);
 		deckPanel.add (opponentPanelNorth, BorderLayout.NORTH);
-		
+
 		// Create panel for the chat box
 		JPanel textPanel = new JPanel();
 		textPanel.setLayout (new BorderLayout());
@@ -66,18 +66,18 @@ public class GameScreen extends JPanel {
 
 		// Create panel for the bottom of the chat box, where a player can enter text
 		JPanel chatBottomPanel = new JPanel (new FlowLayout());
-		
+
 		textField = new JTextField (15);
 		textField.addKeyListener (new ChatKeyListener (this));
-		
+
 		sendMessage = new JButton ("Send");
 		sendMessage.addActionListener (new ChatActionListener (this));
-		
+
 		chatBottomPanel.add (textField);
 		chatBottomPanel.add (sendMessage);
-		
+
 		textPanel.add (chatBottomPanel, BorderLayout.SOUTH);
-		
+
 		// Create area for the text to appear in
 		textArea = new JTextArea ("", 7, 20);
 		textArea.setEditable (false);
@@ -85,82 +85,75 @@ public class GameScreen extends JPanel {
 		textPanel.add (textArea, BorderLayout.CENTER);
 
 	}
-	
-	
+
+
 	public MyGame getMyGame() {
 		return myGame;
-		
-	}
-	
-	
-	public HClient getClient() {
-		return client;
-		
 	}
 
-	
+
+	public HClient getClient() {
+		return client;
+	}
+
+
 	public FieldPanel getFieldPanel () {
 		return fieldPanel;
-		
 	}
-	
-	
+
+
 	public HandPanel getHandPanel () {
 		return handPanel;
-		
 	}
-	
-	
+
+
 	public OpponentPanel getOpponentPanel() {
 		return opponentPanelNorth;
-		
+
 	}
-	
-	
+
+
 	public void enterNewMessage (String newMessage) {
 		textArea.append (newMessage + "\n");
-		
 	}
-	
-	
+
+
 	public void sendFinalScoreMessage (String message) {
 		getMyGame().getChatClient().sendMessage (message);
 		textArea.append (message + "\n");
 	}
-	
-	
+
+
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-	
 	}
-	
-	
+
+
 	// ActionListener for send button; sends entered text to server
 	public class ChatActionListener implements ActionListener {
 		private GameScreen myGameScreen;
-		
+
 		public ChatActionListener (GameScreen gameScreen) {
 			myGameScreen = gameScreen;
 		}
-		
+
 		public void actionPerformed (ActionEvent ae) {
 			if(textField.getText().length() < 1) {
-				//do nothing, no message
 			}
 			else{
 				String newMessage = "<" + myGame.getName() + ">: " + textField.getText();
 				myGameScreen.getMyGame().getChatClient().sendMessage(newMessage);
-				textArea.append(newMessage + "\n"); 
+				textArea.append(newMessage + "\n");
 				textField.setText("");
 			}
 		}
 	}
-	
-	
+
+
 	// KeyListener for when enter key is clicked; sends entered text to server
 	public class ChatKeyListener implements KeyListener {
 		private GameScreen myGameScreen;
-		
+
 		public ChatKeyListener (GameScreen gameScreen) {
 			myGameScreen = gameScreen;
 		}
@@ -173,17 +166,17 @@ public class GameScreen extends JPanel {
 				else {
 					String newMessage = "<" + myGame.getName() + ">: " + textField.getText();
 					myGameScreen.getMyGame().getChatClient().sendMessage(newMessage);
-					textArea.append(newMessage + "\n"); 
+					textArea.append(newMessage + "\n");
 					textField.setText("");
 				}
 			}
 		}
 
-		public void keyReleased(KeyEvent arg0) {			
+		public void keyReleased(KeyEvent arg0) {
 		}
 
 		public void keyTyped(KeyEvent e) {
-			
+
 		}
 	}
 

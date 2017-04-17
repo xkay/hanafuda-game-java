@@ -37,9 +37,7 @@ public class ChatThread extends Thread{
 			}
 
 		} catch (IOException e) {
-
 			cs.removeClient(this);
-
 			e.printStackTrace();
 		}
 	}

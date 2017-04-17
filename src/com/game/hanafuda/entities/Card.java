@@ -1,9 +1,6 @@
 package com.usc.hanafuda.entities;
 
-
-
 import java.io.Serializable;
-
 import javax.swing.ImageIcon;
 
 public class Card implements Serializable {
@@ -23,9 +20,9 @@ public class Card implements Serializable {
 	private boolean gaji;
 	private Month gajiMonth;
 	private ImageIcon image;
-    private int id;
+  private int id;
 	public Card (int id, String n, Month m, Yaku y1, Yaku y2, boolean g, ImageIcon i, int v) {
-        this.id = id;
+    this.id = id;
 		this.name = n;
 		this.month = m;
 		this.yaku1 = y1;

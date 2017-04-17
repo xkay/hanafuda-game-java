@@ -14,8 +14,7 @@ public class MyAssetHandler {
 	public final static int COL = 4;
 	public final static int WIDTH = 85;
 	public final static int HEIGHT = 140;
-
-
+	
 	public static BufferedImage[] cardImageArray = new BufferedImage[SIZE];
 	public static ImageIcon[] cardIconArray = new ImageIcon[SIZE];
 
@@ -26,10 +25,6 @@ public class MyAssetHandler {
 		BufferedImage image = null;
 		try {
 			image = ImageIO.read(new File("all.png"));
-
-			//DEBUG
-			//System.out.println("load + cardImage.jpg");
-
 			deckImage = ImageIO.read(new File("deck.png"));
 
 			for(int i = 0; i < ROW; i++){
@@ -46,7 +41,7 @@ public class MyAssetHandler {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static ImageIcon getIcon(int i) {
 		//DEBUG
 		//System.out.println("image at " + i);

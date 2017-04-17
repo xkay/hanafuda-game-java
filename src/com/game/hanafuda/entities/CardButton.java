@@ -23,11 +23,6 @@ public class CardButton extends JButton {
 		this.setIcon(cardIconArray);
 		this.cardUp = false;
 	}
-
-	public CardButton() {
-		// TODO Auto-generated constructor stub
-	}
-
 	public int getNewX() {
 		return x;
 	}

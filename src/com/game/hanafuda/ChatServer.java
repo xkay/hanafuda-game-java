@@ -22,7 +22,6 @@ public class ChatServer {
 				ctVector.add(ct);
 				ct.start();
 			}
-
 		}
 
 		catch (IOException e) {

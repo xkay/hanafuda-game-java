@@ -20,11 +20,9 @@ public class ChatClient extends Thread {
 			Socket s=new Socket(hostname, port);
 			this.pw=new PrintWriter(s.getOutputStream());
 			this.br=new BufferedReader(new InputStreamReader(s.getInputStream()));
-
 			this.myGame = g;
-
 			this.start();
-
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
